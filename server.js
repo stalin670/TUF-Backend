@@ -10,29 +10,31 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.get('/api/banner', (req, res) => {
-    db.query('SELECT * FROM banner WHERE id = 1', (err, result) => {
-        if(err)
+    db.query('SELECT * FROM banner', (err, result) => {
+        if (err)
             console.log(err);
-        res.json(result[0]);
+        res.json(result);
     });
 });
 
-app.post('/api/bannner', (req, res) => {
+app.post('/api/banner', (req, res) => { // fixed 'bannner' typo
     const { visible, description, timer, link } = req.body;
-    const query = 'UPDATE banner SET visible = ?, desciption = ?, timer = ?, link = ? WHERE id = 1';
-    
+    const query = 'UPDATE banner SET visible = ?, description = ?, timer = ?, link = ? WHERE id = 1';
+
     db.query(query, [visible, description, timer, link], (err) => {
-        if(err)
-            console.log(err);
+        if (err) {
+            console.error("Error updating banner:", err);
+            return res.status(500).send('Error updating banner');
+        }
         res.send('Banner updated successfully');
     });
 });
 
-db.query("select * from banner",(err, result) => {
-    if(err) 
-        console.log(err);
-    console.log("Result : ", result);
-})
+// db.query("select * from banner",(err, result) => {
+//     if(err) 
+//         console.log(err);
+//     console.log("Result : ", result);
+// })
 
 
 

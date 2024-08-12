@@ -1,6 +1,6 @@
-CREATE DATABASE banner_db;
+CREATE DATABASE amit_db;
 
-USE banner_db;
+USE amit_db;
 
 CREATE TABLE banner (
   id INT PRIMARY KEY AUTO_INCREMENT,
@@ -11,3 +11,5 @@ CREATE TABLE banner (
 );
 
 INSERT INTO banner (visible, description, timer, link) VALUES (false, '', 0, '');
+
+
